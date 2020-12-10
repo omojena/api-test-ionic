@@ -1,0 +1,64 @@
+#meteor
+.meteor/local/*
+settings.json
+settings-dev.json
+settings-prod.json
+public/sw-nitro.js
+public/sw-dirty.js
+public/sw-playground.js
+imports/ui/service-worker.js
+imports/ui/service-worker-2.js
+imports/ui/components/smart/pwa/subscribe-btns/
+imports/ui/layouts/default/
+
+# dependencies
+node_modules
+npm-shrinkwrap.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/.scannerwork
+/.scannerWork
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+/src/environments/base.ts
+settings.dev.json
+settings.staging.json
+settings.production.json
+.env
+.directory
+error.log
+combined.log
+.migrate
+
+/src/config/dev.js
+/src/config/development.js
+/src/config/local.js
+
+package-lock.json

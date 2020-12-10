@@ -1,0 +1,48 @@
+{
+  "name": "packages",
+  "version": "1.0.0",
+  "description": "Polls",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omojena/back-polls.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongodb",
+    "javascript"
+  ],
+  "author": "osmel.dubet@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omojena/testIonic/issues"
+  },
+  "homepage": "https://github.com/omojena/testIonic#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bluebird": "^3.7.2",
+    "body-parser": "latest",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "5.3.1",
+    "express-session": "^1.17.1",
+    "express-swagger-generator": "^1.1.17",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.17",
+    "mongoose-autopopulate": "^0.12.2",
+    "mongoose-bcrypt": "^1.8.0",
+    "mongoose-unique-validator": "^2.0.3"
+  },
+  "devDependencies": {
+    "migrate": "^1.7.0",
+    "nodemon": "^2.0.4"
+  }
+}
