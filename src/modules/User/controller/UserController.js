@@ -33,7 +33,6 @@ class UserController {
                 if (response && UserServices.validPassword(password, response.password)) {
                     const claim = UserServices.mapClaim(response);
                     const token = jwt.sign({...claim}, process.env.JWT_KEY);
-                    console.log(token);
                     res.status(200).send({token, user: response})
                 } else {
                     handleError(res, new BadRequest('Bad credentials'));
@@ -68,12 +67,12 @@ class UserController {
     }
 
     create(req, res) {
-        const {username, fullName, password, tenant, role} = req.body;
+        const {username, fullName, password} = req.body;
         if (!username) return handleError(res, new BadRequest('Username is required'));
         if (!fullName) return handleError(res, new BadRequest('The name is required'));
         if (!password) return handleError(res, new BadRequest('Password is required'));
 
-        UserServices.create({username, fullName, password, tenant, role})
+        UserServices.create(req.body)
             .then(response => {
                 res.status(201).send(response);
             })

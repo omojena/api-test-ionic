@@ -1,4 +1,4 @@
-const ListServices = require('./ListaService');
+const ListServices = require('./IdentityService');
 
 module.exports = {
     ListServices

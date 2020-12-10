@@ -8,6 +8,10 @@ const UserSchema = new Schema({
     fullName: {
         type: String
     },
+    isVerify: {
+        type: Boolean,
+        default: false
+    },
     password: {
         type: String,
         bcrypt: true

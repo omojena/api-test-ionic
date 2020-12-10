@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/omojena/testIonic#readme",
   "dependencies": {
+    "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "bluebird": "^3.7.2",
     "body-parser": "latest",

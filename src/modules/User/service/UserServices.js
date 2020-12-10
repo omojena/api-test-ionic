@@ -36,7 +36,8 @@ class UserServices {
             _id: user._id,
             role: user.role,
             username: user.username,
-            fullName: user.fullName
+            fullName: user.fullName,
+            isVerify: user.isVerify,
         }
     }
 

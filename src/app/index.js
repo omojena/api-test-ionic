@@ -6,7 +6,25 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const Modules = require('../modules');
 const {createAuthenticationMiddleware} = require('../middleware/auth');
+const allowedOrigins = [
+    'capacitor://localhost',
+    'ionic://localhost',
+    'http://localhost',
+    'http://localhost:8080',
+    'http://localhost:8100',
+    'http://localhost:4200'
+];
 
+// Reflect the origin if it's in the allowed list or not defined (cURL, Postman, etc.)
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Origin not allowed by CORS'));
+        }
+    }
+};
 
 class Server {
 
@@ -38,6 +56,7 @@ class Server {
 
     _applyMiddleware() {
         this.app.use(cors());
+        this.app.options('*', cors(corsOptions));
         this.app.set('key', this.JWT_KEY);
         this.app.use(bodyParser.urlencoded({extended: true}));
         this.app.use(bodyParser.json());

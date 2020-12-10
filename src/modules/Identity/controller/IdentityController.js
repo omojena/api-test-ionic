@@ -1,4 +1,4 @@
-const ListServices = require('../service/ListaService');
+const IdentityServices = require('../service/IdentityService');
 const {handleError, BadRequest, NotFound} = require('../../../ErrorResorces');
 const express = require('express');
 
@@ -10,11 +10,12 @@ class IdentityController {
     }
 
     init() {
-        this.router.get('/lists', this.getAll.bind(this));
-        this.router.get('/list/:_id', this.getById.bind(this));
-        this.router.post('/list', this.create.bind(this));
-        this.router.put('/list', this.update.bind(this));
-        this.router.delete('/list/:_id', this.delete.bind(this));
+        this.router.get('/identity/list', this.getAll.bind(this));
+        this.router.get('/identity/:_id', this.getById.bind(this));
+        this.router.get('/identity/user/:_id', this.getByUserId.bind(this));
+        this.router.post('/identity', this.create.bind(this));
+        this.router.put('/identity', this.update.bind(this));
+        this.router.delete('/identity/:_id', this.delete.bind(this));
     }
 
     get Router() {
@@ -22,7 +23,7 @@ class IdentityController {
     }
 
     getAll(req, res) {
-        ListServices.findAll()
+        IdentityServices.findAll()
             .then(response => {
                 res.status(200).send(response);
             })
@@ -33,8 +34,8 @@ class IdentityController {
 
     getById(req, res) {
         const _id = req.params;
-        if(!_id) return handleError(res, new BadRequest('"id" es requerido'));
-        ListServices.findById(_id)
+        if (!_id) return handleError(res, new BadRequest('"id" is required'));
+        IdentityServices.findById(_id)
             .then(response => {
                 res.status(200).send(response);
             })
@@ -43,9 +44,21 @@ class IdentityController {
             })
     }
 
+    getByUserId(req, res) {
+        const _id = req.params;
+        if (!_id) return handleError(res, new BadRequest('"id" is required'));
+        IdentityServices.findByUserId(_id)
+            .then(response => {
+                const claim = IdentityServices.mapClaim(response);
+                res.status(200).send(claim);
+            })
+            .catch(error => {
+                handleError(res, new BadRequest(error.message));
+            })
+    }
+
     create(req, res) {
-        const {lista, tirada, limpio, bruto, premio, fecha, clave} = req.body;
-        ListServices.create({lista, tirada, limpio, bruto, premio, fecha, clave, createBy: req.user})
+        IdentityServices.create({user_id: req.user, ...req.body})
             .then(response => {
                 res.status(201).send(response);
             })
@@ -55,37 +68,37 @@ class IdentityController {
     }
 
     update(req, res) {
-        const {clave, ...list} = req.body;
-        if(!clave) return handleError(res, new BadRequest('"id" es requerido'));
-        ListServices.findOne({clave})
-            .then((dbList) => {
-                if (dbList) {
-                    ListServices.updateById(dbList._id, list)
-                        .then(() => {
-                            res.send({_id: dbList._id});
-                        })
-                        .catch(error => {
-                            handleError(res, new BadRequest(error.message));
-                        })
-                } else {
-                    handleError(res, new NotFound('List Not Found'));
-                }
+        const {_id} = req.params;
+        const identity = req.body;
+        if (!_id) return handleError(res, new BadRequest('"id" is required'));
+        IdentityServices.findById(_id)
+            .then(() => {
+                IdentityServices.updateById(_id, identity)
+                    .then(() => {
+                        res.send({_id});
+                    })
+                    .catch(error => {
+                        handleError(res, new BadRequest(error.message));
+                    })
             })
-            .catch(() => {
-                handleError(res, new NotFound('List Not Found'));
+            .catch((error) => {
+                handleError(res, new BadRequest(error.message));
             })
+
     }
+
 
     delete(req, res) {
         const {_id} = req.params;
-        if(!_id) return handleError(res, new BadRequest('"id" es requerido'));
-        ListServices.findById(_id)
+        if (!_id) return handleError(res, new BadRequest('"id" is required'));
+        IdentityServices.findById(_id)
             .then(() => {
-                ListServices.delete(_id)
+                IdentityServices.delete(_id)
             }).catch(() => {
-            handleError(res, new NotFound('List Not Found'));
+            handleError(res, new NotFound('Identity Not Found'));
         })
     }
+
 
 }
 
