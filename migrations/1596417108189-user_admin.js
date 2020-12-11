@@ -5,7 +5,7 @@ const Bluebird = require('bluebird');
 const bycrypt = require('bcrypt');
 const MongoClient = mongodb.MongoClient;
 Bluebird.promisifyAll(MongoClient);
-const URL = process.env.APP_MONGO_URL;
+const URL =`mongodb+srv://admin:${process.env.DB_ADMIN_PASSWORD}@cluster0.fzhu2.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 module.exports.up = function (next) {
     let mClient = null;
