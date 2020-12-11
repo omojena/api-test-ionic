@@ -30,7 +30,7 @@ class Server {
 
     constructor() {
         this.app = express();
-        this.mongoURL = process.env.APP_MONGO_URL;
+        this.mongoURL =`mongodb+srv://admin:${process.env.DB_ADMIN_PASSWORD}@cluster0.fzhu2.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
         this.PORT = process.env.PORT || 8000;
         this.JWT_KEY = process.env.JWT_KEY;
     }

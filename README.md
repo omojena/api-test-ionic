@@ -2,7 +2,8 @@
 
 #Variables de Entorno
 ```
-APP_MONGO_URL
+DB_NAME
+DB_ADMIN_USER
 JWT_KEY
 APP_ADMIN_PASSWORD
 PORT
