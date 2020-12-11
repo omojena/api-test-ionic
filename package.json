@@ -40,10 +40,10 @@
     "mongoose": "^5.9.17",
     "mongoose-autopopulate": "^0.12.2",
     "mongoose-bcrypt": "^1.8.0",
-    "mongoose-unique-validator": "^2.0.3"
+    "mongoose-unique-validator": "^2.0.3",
+    "migrate": "^1.7.0"
   },
   "devDependencies": {
-    "migrate": "^1.7.0",
     "nodemon": "^2.0.4"
   }
 }
